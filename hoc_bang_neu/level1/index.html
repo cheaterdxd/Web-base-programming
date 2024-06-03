@@ -1,0 +1,491 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        /* #gate {
+            cursor: pointer;
+            margin-bottom: 100px;
+            width: 83px;
+            height: 46px;
+        } */
+
+        #nibbanCircle {
+            width: 150px;
+            /* Đường kính của hình tròn */
+            height: 150px;
+            /* Đường kính của hình tròn */
+            border-radius: 50%;
+            /* Bo tròn các góc thành 50% để tạo hình tròn */
+            background-color: rgb(216, 200, 28);
+            /* Màu nền của hình tròn */
+            position: absolute;
+            left: 450px;
+            top: 390px;
+            z-index: 2;
+        }
+
+        #tam121square {
+            width: 300px;
+            height: 500px;
+            background-color: rgb(194, 193, 193);
+            position: absolute;
+            left: 10px;
+            top: 50px;
+        }
+
+        #tamso52square {
+            width: 300px;
+            height: 260px;
+            background-color: rgb(226, 213, 127);
+            position: absolute;
+            left: 310px;
+            top: 50px;
+        }
+
+
+        #sacphap28square {
+            width: 300px;
+            height: 240px;
+            background-color: rgb(24, 92, 134);
+            position: absolute;
+            left: 310px;
+            top: 310px;
+        }
+
+        #chedinh13square {
+            width: 600px;
+            height: 200px;
+            background-color: rgb(79, 163, 115);
+            position: absolute;
+            left: 10px;
+            top: 550px;
+        }
+
+        /* #square5_2 {
+            width: 295px;
+            height: 200px;
+            background-color: rgb(79, 163, 115);
+            position: absolute;
+            left: 315px;
+            top: 550px;
+        } */
+
+        #tam121Lb {
+            width: 100px;
+            height: 50px;
+            background-color: rgb(12, 10, 10);
+            z-index: 3;
+            position: relative;
+            left: 700px;
+        }
+
+        #tamso52Lb {
+            width: 100px;
+            height: 50px;
+            background-color: rgb(12, 10, 10);
+            z-index: 3;
+            position: relative;
+            left: 700px;
+        }
+
+        #sacphap28Lb {
+            width: 120px;
+            height: 50px;
+            background-color: rgb(12, 10, 10);
+            z-index: 3;
+            position: relative;
+            left: 700px;
+        }
+
+        #nibbanLb {
+            width: 100px;
+            height: 50px;
+            background-color: rgb(12, 10, 10);
+            z-index: 3;
+            position: relative;
+            left: 700px;
+        }
+
+        #phapchedinh13Lb {
+            width: 100px;
+            height: 50px;
+            background-color: rgb(12, 10, 10);
+            z-index: 3;
+            position: relative;
+            left: 700px;
+        }
+
+        button {
+            position: relative;
+            left: 700px;
+        }
+
+        .container {
+            display: grid;
+            /* Bật Grid cho container */
+            place-items: center;
+            /* Căn giữa cả theo chiều ngang và chiều dọc */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <p>Hãy đặt tên chính xác cho từng khu vực</p>
+
+        <!-- <img src="https://en.js.cx/clipart/soccer-gate.svg" id="gate" class="droppable">
+
+  <img src="https://en.js.cx/clipart/tam121Lb.svg" id="tam121Lb"> -->
+        <div id="tam121square"></div>
+
+        <div id="nibbanCircle"></div>
+
+        <div id="tamso52square"></div>
+
+        <div id="sacphap28square"></div>
+
+        <div id="chedinh13square"></div>
+
+        <!-- <div id="square5_2"></div> -->
+
+        <div id="tam121Lb">
+            <p style="color: aliceblue;">121 Tâm</p>
+        </div>
+        <div id="tamso52Lb">
+            <p style="color: aliceblue;">52 Tâm sở</p>
+        </div>
+        <div id="sacphap28Lb">
+            <p style="color: aliceblue;">28 sắc pháp</p>
+        </div>
+        <div id="nibbanLb">
+            <p style="color: aliceblue;">1 nibbanna</p>
+        </div>
+        <div id="phapchedinh13Lb">
+            <p style="color: aliceblue;">13 pháp chế định</p>
+        </div>
+        <button id="checkResult">Kiểm tra kết quả</button>
+    </div>
+    <script>
+
+        let currentDroppable = null;
+
+        tam121Lb.onmousedown = function (event) {
+
+            let shiftX = event.clientX - tam121Lb.getBoundingClientRect().left;
+            let shiftY = event.clientY - tam121Lb.getBoundingClientRect().top;
+
+            tam121Lb.style.position = 'absolute';
+            tam121Lb.style.zIndex = 1000;
+            document.body.append(tam121Lb);
+
+            moveAt(event.pageX, event.pageY);
+
+            function moveAt(pageX, pageY) {
+                tam121Lb.style.left = pageX - shiftX + 'px';
+                tam121Lb.style.top = pageY - shiftY + 'px';
+            }
+
+            function onMouseMove(event) {
+                moveAt(event.pageX, event.pageY);
+
+                tam121Lb.hidden = true;
+                let elemBelow = document.elementFromPoint(event.clientX, event.clientY);
+                tam121Lb.hidden = false;
+
+                if (!elemBelow) return;
+
+                let droppableBelow = elemBelow.closest('.droppable');
+                if (currentDroppable != droppableBelow) {
+                    if (currentDroppable) { // null when we were not over a droppable before this event
+                        leaveDroppable(currentDroppable);
+                    }
+                    currentDroppable = droppableBelow;
+                    if (currentDroppable) { // null if we're not coming over a droppable now
+                        // (maybe just left the droppable)
+                        enterDroppable(currentDroppable);
+                    }
+                }
+            }
+
+            document.addEventListener('mousemove', onMouseMove);
+
+            tam121Lb.onmouseup = function () {
+                document.removeEventListener('mousemove', onMouseMove);
+                tam121Lb.onmouseup = null;
+            };
+
+        };
+
+        tamso52Lb.onmousedown = function (event) {
+
+            let shiftX = event.clientX - tamso52Lb.getBoundingClientRect().left;
+            let shiftY = event.clientY - tamso52Lb.getBoundingClientRect().top;
+
+            tamso52Lb.style.position = 'absolute';
+            tamso52Lb.style.zIndex = 1000;
+            document.body.append(tamso52Lb);
+
+            moveAt(event.pageX, event.pageY);
+
+            function moveAt(pageX, pageY) {
+                tamso52Lb.style.left = pageX - shiftX + 'px';
+                tamso52Lb.style.top = pageY - shiftY + 'px';
+            }
+
+            function onMouseMove(event) {
+                moveAt(event.pageX, event.pageY);
+
+                tamso52Lb.hidden = true;
+                let elemBelow = document.elementFromPoint(event.clientX, event.clientY);
+                tamso52Lb.hidden = false;
+
+                if (!elemBelow) return;
+
+                let droppableBelow = elemBelow.closest('.droppable');
+                if (currentDroppable != droppableBelow) {
+                    if (currentDroppable) { // null when we were not over a droppable before this event
+                        leaveDroppable(currentDroppable);
+                    }
+                    currentDroppable = droppableBelow;
+                    if (currentDroppable) { // null if we're not coming over a droppable now
+                        // (maybe just left the droppable)
+                        enterDroppable(currentDroppable);
+                    }
+                }
+            }
+
+            document.addEventListener('mousemove', onMouseMove);
+
+            tamso52Lb.onmouseup = function () {
+                document.removeEventListener('mousemove', onMouseMove);
+                tamso52Lb.onmouseup = null;
+            };
+
+        };
+
+        sacphap28Lb.onmousedown = function (event) {
+
+            let shiftX = event.clientX - sacphap28Lb.getBoundingClientRect().left;
+            let shiftY = event.clientY - sacphap28Lb.getBoundingClientRect().top;
+
+            sacphap28Lb.style.position = 'absolute';
+            sacphap28Lb.style.zIndex = 1000;
+            document.body.append(sacphap28Lb);
+
+            moveAt(event.pageX, event.pageY);
+
+            function moveAt(pageX, pageY) {
+                sacphap28Lb.style.left = pageX - shiftX + 'px';
+                sacphap28Lb.style.top = pageY - shiftY + 'px';
+            }
+
+            function onMouseMove(event) {
+                moveAt(event.pageX, event.pageY);
+
+                sacphap28Lb.hidden = true;
+                let elemBelow = document.elementFromPoint(event.clientX, event.clientY);
+                sacphap28Lb.hidden = false;
+
+                if (!elemBelow) return;
+
+                let droppableBelow = elemBelow.closest('.droppable');
+                if (currentDroppable != droppableBelow) {
+                    if (currentDroppable) { // null when we were not over a droppable before this event
+                        leaveDroppable(currentDroppable);
+                    }
+                    currentDroppable = droppableBelow;
+                    if (currentDroppable) { // null if we're not coming over a droppable now
+                        // (maybe just left the droppable)
+                        enterDroppable(currentDroppable);
+                    }
+                }
+            }
+
+            document.addEventListener('mousemove', onMouseMove);
+
+            sacphap28Lb.onmouseup = function () {
+                document.removeEventListener('mousemove', onMouseMove);
+                sacphap28Lb.onmouseup = null;
+            };
+
+        };
+
+        nibbanLb.onmousedown = function (event) {
+
+            let shiftX = event.clientX - nibbanLb.getBoundingClientRect().left;
+            let shiftY = event.clientY - nibbanLb.getBoundingClientRect().top;
+
+            nibbanLb.style.position = 'absolute';
+            nibbanLb.style.zIndex = 1000;
+            document.body.append(nibbanLb);
+
+            moveAt(event.pageX, event.pageY);
+
+            function moveAt(pageX, pageY) {
+                nibbanLb.style.left = pageX - shiftX + 'px';
+                nibbanLb.style.top = pageY - shiftY + 'px';
+            }
+
+            function onMouseMove(event) {
+                moveAt(event.pageX, event.pageY);
+
+                nibbanLb.hidden = true;
+                let elemBelow = document.elementFromPoint(event.clientX, event.clientY);
+                nibbanLb.hidden = false;
+
+                if (!elemBelow) return;
+
+                let droppableBelow = elemBelow.closest('.droppable');
+                if (currentDroppable != droppableBelow) {
+                    if (currentDroppable) { // null when we were not over a droppable before this event
+                        leaveDroppable(currentDroppable);
+                    }
+                    currentDroppable = droppableBelow;
+                    if (currentDroppable) { // null if we're not coming over a droppable now
+                        // (maybe just left the droppable)
+                        enterDroppable(currentDroppable);
+                    }
+                }
+            }
+
+            document.addEventListener('mousemove', onMouseMove);
+
+            nibbanLb.onmouseup = function () {
+                document.removeEventListener('mousemove', onMouseMove);
+                nibbanLb.onmouseup = null;
+            };
+
+        };
+
+        phapchedinh13Lb.onmousedown = function (event) {
+
+            let shiftX = event.clientX - phapchedinh13Lb.getBoundingClientRect().left;
+            let shiftY = event.clientY - phapchedinh13Lb.getBoundingClientRect().top;
+
+            phapchedinh13Lb.style.position = 'absolute';
+            phapchedinh13Lb.style.zIndex = 1000;
+            document.body.append(phapchedinh13Lb);
+
+            moveAt(event.pageX, event.pageY);
+
+            function moveAt(pageX, pageY) {
+                phapchedinh13Lb.style.left = pageX - shiftX + 'px';
+                phapchedinh13Lb.style.top = pageY - shiftY + 'px';
+            }
+
+            function onMouseMove(event) {
+                moveAt(event.pageX, event.pageY);
+
+                phapchedinh13Lb.hidden = true;
+                let elemBelow = document.elementFromPoint(event.clientX, event.clientY);
+                phapchedinh13Lb.hidden = false;
+
+                if (!elemBelow) return;
+
+                let droppableBelow = elemBelow.closest('.droppable');
+                if (currentDroppable != droppableBelow) {
+                    if (currentDroppable) { // null when we were not over a droppable before this event
+                        leaveDroppable(currentDroppable);
+                    }
+                    currentDroppable = droppableBelow;
+                    if (currentDroppable) { // null if we're not coming over a droppable now
+                        // (maybe just left the droppable)
+                        enterDroppable(currentDroppable);
+                    }
+                }
+            }
+
+            document.addEventListener('mousemove', onMouseMove);
+
+            phapchedinh13Lb.onmouseup = function () {
+                document.removeEventListener('mousemove', onMouseMove);
+                phapchedinh13Lb.onmouseup = null;
+            };
+
+        };
+
+        function enterDroppable(elem) {
+            elem.style.background = 'pink';
+        }
+
+        function leaveDroppable(elem) {
+            elem.style.background = '';
+        }
+        function getRandom(what) {
+            const good_phrases = ["Đúng rồi! Giỏi quá ta", "Hoàn toàn chính xác !", "Sadhu! Sadhu! Lành thay cho trí nhớ tuyệt vời!", "Thật mừng vì đã đúng rồi!", "Tiếp tục phát huy bạn nhé!"];
+            const bad_phrases = ["Ôi chưa chuẩn lắm !", "Hãy thử lại nào !", "Bạn cần cố gắng hơn xíu nữa", "Sai mất rồi nè !", "Làm lại nào, một lần nữa!"];
+
+            if (what === "good") {
+                const randomIndex = Math.floor(Math.random() * good_phrases.length);
+                return good_phrases[randomIndex];
+            } else {
+                const randomIndex = Math.floor(Math.random() * bad_phrases.length);
+                return bad_phrases[randomIndex];
+            }
+        }
+
+        function checkInside(ele_name1, ele_name2) {
+            const element1 = document.getElementById(ele_name1);
+            const element2 = document.getElementById(ele_name2);
+
+            const rect1 = element1.getBoundingClientRect();
+            const rect2 = element2.getBoundingClientRect();
+            if (
+                rect1.left >= rect2.left &&
+                rect1.left + rect1.width <= rect2.left + rect2.width &&
+                rect1.top >= rect2.top &&
+                rect1.top + rect1.height <= rect2.top + rect2.height
+            ) {
+                console.log('Element 1 nằm trên element 2');
+                return true;
+            } else {
+                console.log('Element 1 không nằm trên element 2');
+                console.log(rect1);
+                console.log(rect2);
+                return false;
+            }
+        }
+
+        tam121Lb.ondragstart = function () {
+            return false;
+        };
+
+        const button = document.getElementById('checkResult');
+
+        button.addEventListener('click', function () {
+            // const l1 = tam121Lb.getBoundingClientRect();
+            // const l2 = tamso52Lb.getBoundingClientRect();
+            // const l3 = sacphap28Lb.getBoundingClientRect();
+            // const l4 = nibbanLb.getBoundingClientRect();
+            // const l5 = phapchedinh13Lb.getBoundingClientRect();
+            // const tam121square = document.getElementById('tam121square');
+            // const tamso52square = document.getElementById('tamso52square');
+            // const sacphap28square = document.getElementById('sacphap28square');
+            // const chedinh13square = document.getElementById('chedinh13square');
+            // const square5_2 = document.getElementById('square5_2');
+            // console.log(l1.left);
+            // console.log(l2.left);
+            // console.log(l3.left);
+            // console.log(l4.left);
+            // console.log(l5.left);
+            if (checkInside("tam121Lb", 'tam121square') &&
+                checkInside("tamso52Lb", "tamso52square") &&
+                checkInside("sacphap28Lb", "sacphap28square") &&
+                checkInside("nibbanLb", "nibbanCircle") &&
+                checkInside("phapchedinh13Lb", "chedinh13square")
+            ) {
+                alert(getRandom("good"));
+            } else {
+                alert(getRandom("bad"))
+            }
+            // if()    s
+        });
+
+    </script>
+
+
+</body>
+
+</html>
