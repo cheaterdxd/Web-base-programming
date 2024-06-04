@@ -1,16 +1,19 @@
 <!doctype html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <style>
-        /* #gate {
-            cursor: pointer;
-            margin-bottom: 100px;
-            width: 83px;
-            height: 46px;
-        } */
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cùng học bảng nêu chi pháp với TRUNG TÂM CHÍ DŨNG</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
         #nibbanCircle {
             width: 150px;
             /* Đường kính của hình tròn */
@@ -61,6 +64,11 @@
             position: absolute;
             left: 10px;
             top: 550px;
+
+        }
+
+        .radius_square {
+            border-radius: 10px;
         }
 
         /* #square5_2 {
@@ -79,6 +87,9 @@
             z-index: 3;
             position: relative;
             left: 700px;
+            color: white;
+            border-radius: 10px;
+            text-align: center;
         }
 
         #tamso52Lb {
@@ -88,6 +99,9 @@
             z-index: 3;
             position: relative;
             left: 700px;
+            color: white;
+            border-radius: 10px;
+            text-align: center;
         }
 
         #sacphap28Lb {
@@ -97,6 +111,9 @@
             z-index: 3;
             position: relative;
             left: 700px;
+            color: white;
+            border-radius: 10px;
+            text-align: center;
         }
 
         #nibbanLb {
@@ -106,6 +123,9 @@
             z-index: 3;
             position: relative;
             left: 700px;
+            color: white;
+            border-radius: 10px;
+            text-align: center;
         }
 
         #phapchedinh13Lb {
@@ -115,57 +135,43 @@
             z-index: 3;
             position: relative;
             left: 700px;
+            color: white;
+            border-radius: 10px;
+            text-align: center;
         }
-
-        button {
-            position: relative;
-            left: 700px;
-        }
-
         .container {
-            display: grid;
-            /* Bật Grid cho container */
-            place-items: center;
-            /* Căn giữa cả theo chiều ngang và chiều dọc */
+            text-align: center;
         }
     </style>
 </head>
 
 <body>
+   
+
     <div class="container">
-        <p>Hãy đặt tên chính xác cho từng khu vực</p>
+        <h3><strong>Hãy đặt tên chính xác cho từng khu vực</strong></h3>
+        <button type="button" class="btn btn-danger" onclick="checkResult()">Kiểm tra kết quả</button>
+        <button type="button" class="btn btn-light" onclick="resetPlay()">Chơi lại</button>
+        <button id="nextLevel" type="button" class="btn btn-info" disabled > <strong> Đến màn tiếp theo ==></strong></button>
+    </div>
 
-        <!-- <img src="https://en.js.cx/clipart/soccer-gate.svg" id="gate" class="droppable">
+    <div id="tam121square"></div>
 
-  <img src="https://en.js.cx/clipart/tam121Lb.svg" id="tam121Lb"> -->
-        <div id="tam121square"></div>
+    <div id="nibbanCircle"></div>
 
-        <div id="nibbanCircle"></div>
+    <div id="tamso52square"></div>
 
-        <div id="tamso52square"></div>
+    <div id="sacphap28square"></div>
 
-        <div id="sacphap28square"></div>
+    <div id="chedinh13square"></div>
 
-        <div id="chedinh13square"></div>
 
-        <!-- <div id="square5_2"></div> -->
-
-        <div id="tam121Lb">
-            <p style="color: aliceblue;">121 Tâm</p>
-        </div>
-        <div id="tamso52Lb">
-            <p style="color: aliceblue;">52 Tâm sở</p>
-        </div>
-        <div id="sacphap28Lb">
-            <p style="color: aliceblue;">28 sắc pháp</p>
-        </div>
-        <div id="nibbanLb">
-            <p style="color: aliceblue;">1 nibbanna</p>
-        </div>
-        <div id="phapchedinh13Lb">
-            <p style="color: aliceblue;">13 pháp chế định</p>
-        </div>
-        <button id="checkResult">Kiểm tra kết quả</button>
+    <div class="radius_square" style="padding-top: 20px;">
+        <p id="tam121Lb">121 Tâm</p>
+        <p id="tamso52Lb">52 Tâm sở</p>
+        <p id="sacphap28Lb">28 sắc pháp</p>
+        <p id="nibbanLb">1 nibbanna</p>
+        <p id="phapchedinh13Lb">13 pháp chế định</p>
     </div>
     <script>
 
@@ -178,6 +184,7 @@
 
             tam121Lb.style.position = 'absolute';
             tam121Lb.style.zIndex = 1000;
+            // tam121Lb.style.padding = "10px 20px";
             document.body.append(tam121Lb);
 
             moveAt(event.pageX, event.pageY);
@@ -225,6 +232,7 @@
 
             tamso52Lb.style.position = 'absolute';
             tamso52Lb.style.zIndex = 1000;
+            // tamso52Lb.style.padding = "10px 20px";
             document.body.append(tamso52Lb);
 
             moveAt(event.pageX, event.pageY);
@@ -272,6 +280,7 @@
 
             sacphap28Lb.style.position = 'absolute';
             sacphap28Lb.style.zIndex = 1000;
+            // sacphap28Lb.style.padding = "10px 20px";
             document.body.append(sacphap28Lb);
 
             moveAt(event.pageX, event.pageY);
@@ -319,6 +328,7 @@
 
             nibbanLb.style.position = 'absolute';
             nibbanLb.style.zIndex = 1000;
+            // nibbanLb.style.padding = "10px 20px";
             document.body.append(nibbanLb);
 
             moveAt(event.pageX, event.pageY);
@@ -366,6 +376,7 @@
 
             phapchedinh13Lb.style.position = 'absolute';
             phapchedinh13Lb.style.zIndex = 1000;
+            // phapchedinh13Lb.style.padding = "10px 20px";
             document.body.append(phapchedinh13Lb);
 
             moveAt(event.pageX, event.pageY);
@@ -413,6 +424,7 @@
         function leaveDroppable(elem) {
             elem.style.background = '';
         }
+
         function getRandom(what) {
             const good_phrases = ["Đúng rồi! Giỏi quá ta", "Hoàn toàn chính xác !", "Sadhu! Sadhu! Lành thay cho trí nhớ tuyệt vời!", "Thật mừng vì đã đúng rồi!", "Tiếp tục phát huy bạn nhé!"];
             const bad_phrases = ["Ôi chưa chuẩn lắm !", "Hãy thử lại nào !", "Bạn cần cố gắng hơn xíu nữa", "Sai mất rồi nè !", "Làm lại nào, một lần nữa!"];
@@ -452,9 +464,9 @@
             return false;
         };
 
-        const button = document.getElementById('checkResult');
+        // const checkResultBtn = document.getElementById('checkResult');
 
-        button.addEventListener('click', function () {
+        function checkResult() {
             // const l1 = tam121Lb.getBoundingClientRect();
             // const l2 = tamso52Lb.getBoundingClientRect();
             // const l3 = sacphap28Lb.getBoundingClientRect();
@@ -477,11 +489,17 @@
                 checkInside("phapchedinh13Lb", "chedinh13square")
             ) {
                 alert(getRandom("good"));
+                const nextLevelBtn = document.getElementById('nextLevel');
+                nextLevelBtn.disabled = false;
+
             } else {
                 alert(getRandom("bad"))
             }
             // if()    s
-        });
+        };
+        function resetPlay() {
+            window.location.reload(true);
+        }
 
     </script>
 
