@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Draggable Object</title>
+    <style>
+        #draggable {
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+            position: absolute;
+            cursor: move;
+        }
+    </style>
+</head>
+<body>
+
+<div id="draggable"></div>
+
+<script>
+    var draggable = document.getElementById("draggable");
+
+    // Variables to store the position of the mouse and the position of the draggable element
+    var mouseX, mouseY, draggableX, draggableY;
+
+    // Event listener for when the mouse button is pressed down on the draggable element
+    draggable.addEventListener("mousedown", function(event) {
+        // Get the initial position of the mouse and the draggable element
+        mouseX = event.clientX;
+        mouseY = event.clientY;
+        draggableX = draggable.offsetLeft;
+        draggableY = draggable.offsetTop;
+
+        // Event listener for when the mouse moves
+        document.addEventListener("mousemove", moveElement);
+
+        // Event listener for when the mouse button is released
+        document.addEventListener("mouseup", function() {
+            // Remove the event listeners for mousemove and mouseup
+            document.removeEventListener("mousemove", moveElement);
+            document.removeEventListener("mouseup", arguments.callee);
+        });
+    });
+
+    // Function to move the draggable element
+    function moveElement(event) {
+        // Calculate the new position of the draggable element based on the mouse movement
+        var deltaX = event.clientX - mouseX;
+        var deltaY = event.clientY - mouseY;
+        var newPosX = draggableX + deltaX;
+        var newPosY = draggableY + deltaY;
+
+        // Set the new position of the draggable element
+        draggable.style.left = newPosX + "px";
+        draggable.style.top = newPosY + "px";
+    }
+</script>
+
+</body>
+</html>

@@ -152,7 +152,7 @@
         <h3><strong>Hãy đặt tên chính xác cho từng khu vực</strong></h3>
         <button type="button" class="btn btn-danger" onclick="checkResult()">Kiểm tra kết quả</button>
         <button type="button" class="btn btn-light" onclick="resetPlay()">Chơi lại</button>
-        <button id="nextLevel" type="button" class="btn btn-info" disabled > <strong> Đến màn tiếp theo ==></strong></button>
+        <button id="nextLevel" type="button" class="btn btn-success" onclick="gotoNextLevel()" disabled ><strong> Đến màn tiếp theo ==></strong></a></button>
     </div>
 
     <div id="tam121square"></div>
@@ -499,6 +499,9 @@
         };
         function resetPlay() {
             window.location.reload(true);
+        }
+        function gotoNextLevel(){
+            window.location.href = "level2.html"
         }
 
     </script>
